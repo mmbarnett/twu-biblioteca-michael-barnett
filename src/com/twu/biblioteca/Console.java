@@ -11,7 +11,11 @@ class Console {
     }
 
     String getMainMenu() {
-        return "MAIN MENU: \n list books";
+        return "MAIN MENU: \n List Books";
+    }
+
+    String readMessage(String in) {
+        return "Invalid menu option.  Try again.";
     }
 
 }
