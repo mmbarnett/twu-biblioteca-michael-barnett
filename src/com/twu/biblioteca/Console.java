@@ -1,13 +1,17 @@
 package com.twu.biblioteca;
 
-public class Console {
+class Console {
 
-    public Console() {
+    Console() {
 
     }
 
-    public String getWelcomeMessage() {
+    String getWelcomeMessage() {
         return "Hello! \n Welcome to Biblioteca. \n Please type your commands below.";
+    }
+
+    String getMainMenu() {
+        return "MAIN MENU: \n list books";
     }
 
 }

@@ -11,5 +11,11 @@ public class ConsoleTest {
         assertEquals(console.getWelcomeMessage(), "Hello! \n Welcome to Biblioteca. " +
                 "\n Please type your commands below.");
     }
+
+    @Test
+    public void testMainMenu() {
+        Console console = new Console();
+        assertEquals(console.getMainMenu(), "MAIN MENU: \n list books");
+    }
 }
 
