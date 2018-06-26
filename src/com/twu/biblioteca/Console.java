@@ -15,19 +15,28 @@ class Console {
     }
 
     String getMainMenu() {
-        return "MAIN MENU:\nList Books";
+        return "MAIN MENU:\n" +
+                "List Books\n" +
+                "Quit";
     }
 
     String readMessage(String in) {
         if (in.equals("List Books")) {
             return listBooks();
-        } else {
-            return "Invalid menu option.  Try again.";
+        } else if (in.equals("Quit")) {
+            return quit();
+        }
+        else {
+            return "Select a valid option!";
         }
     }
 
     private String listBooks() {
         return library.getBookListInColumns();
+    }
+
+    String quit() {
+       return "Goodbye!";
     }
 
 }

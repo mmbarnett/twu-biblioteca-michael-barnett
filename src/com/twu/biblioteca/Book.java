@@ -4,11 +4,13 @@ public class Book {
     private String title;
     private String author;
     private String year;
+    private boolean isCheckedIn;
 
     Book(String titleArg, String authorArg, String yearArg) {
         title = titleArg;
         author = authorArg;
         year = yearArg;
+        isCheckedIn = true;
     }
 
     String getTitle() {
@@ -28,6 +30,10 @@ public class Book {
     }
 
     String toColumn(int titleLength, int authorLength) {
+        if (!isCheckedIn) {
+            return "";
+        }
+
         StringBuilder row = new StringBuilder(title);
         while (row.length() < titleLength + 3) { // need space even with longest title
             row.append(" ");
@@ -41,6 +47,10 @@ public class Book {
         row.append(year);
 
         return row.toString();
+    }
+
+    void checkOut() {
+        isCheckedIn = false;
     }
 
 

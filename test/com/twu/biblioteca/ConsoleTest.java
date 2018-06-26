@@ -15,14 +15,14 @@ public class ConsoleTest {
     @Test
     public void testMainMenu() {
         Console console = new Console();
-        assertEquals(console.getMainMenu(), "MAIN MENU:\nList Books");
+        assertEquals(console.getMainMenu(), "MAIN MENU:\nList Books\nQuit");
     }
 
     @Test
     public void testReadMessageWithInvalidInput() {
         Console console = new Console();
         String message = "This is invalid";
-        assertEquals(console.readMessage(message), "Invalid menu option.  Try again.");
+        assertEquals(console.readMessage(message), "Select a valid option!");
     }
 
     @Test
@@ -39,5 +39,13 @@ public class ConsoleTest {
                         "Lord of the Flies          Golding, William   1954\n" +
                         "The White Tiger            Adiga, Avarind     2008");
     }
+
+    @Test
+    public void testQuit() {
+        Console console = new Console();
+        String message = "Quit";
+        assertEquals("Goodbye!", console.quit());
+    }
+
 }
 
