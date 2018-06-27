@@ -1,7 +1,5 @@
 package com.twu.biblioteca;
 
-import java.util.*;
-
 /*
 This is the CONSOLE class.  Here, we read in any message typed in by the user,
 perform appropriate operations, and then return a message indicating the result.
@@ -33,18 +31,45 @@ class Console {
         } else if (isACheckoutMessage(in)) {
             return performCheckOutSequence(in);
 
-        }else if (in.equals("Quit")) {
+        } else if (isAReturnMessage(in)) {
+            return performReturnSequence(in);
+
+        } else if (in.equals("Quit")) {
             return quit();
         }
+
         else {
             return "Select a valid option!";
         }
     }
 
+    private boolean isAReturnMessage(String message) {
+        String[] splitIntoWords = message.split(" ");
+        return (splitIntoWords[0].equals("Return"));
+    }
+
+    private String performReturnSequence(String in) {
+        String bookTitle = getAllWordsExceptFirstWord(in); //AH CHANGE THIS
+        if (library.containsTitle(bookTitle)) {
+            Book toReturn = library.getBookByTitle(bookTitle);
+            toReturn.returnBook();
+            return toReturn.getTitle() + " has been successfully returned.\nThank you for returning the book.";
+        }
+        else {
+            return "That book is not available.";
+        }
+    }
+
     private String performCheckOutSequence(String in) {
-        Book toCheckout = parseCheckoutMessageAndReturnBook(in);
-        toCheckout.checkOut();
-        return toCheckout.getTitle() + " has been successfully checked out.";
+        String bookTitle = getAllWordsExceptFirstWord(in);
+        if (library.containsTitle(bookTitle)) {
+            Book toCheckout = library.getBookByTitle(bookTitle);
+            toCheckout.checkOut();
+            return toCheckout.getTitle() + " has been successfully checked out.\nThank you! Enjoy the book.";
+        }
+        else {
+            return "That book is not available.";
+        }
     }
 
     private boolean isACheckoutMessage(String message) {
@@ -53,11 +78,11 @@ class Console {
     }
 
     private Book parseCheckoutMessageAndReturnBook(String message) {
-        String bookTitle = parseCheckoutMessageAndReturnTitle(message);
+        String bookTitle = getAllWordsExceptFirstWord(message);
         return library.getBookByTitle(bookTitle);
     }
 
-    private String parseCheckoutMessageAndReturnTitle(String message) {
+    private String getAllWordsExceptFirstWord(String message) {
         int indexOfSpace = message.indexOf(' ');
         return message.substring(indexOfSpace + 1); // the book title
     }

@@ -52,17 +52,26 @@ public class ConsoleTest {
         Console console = new Console();
         String message = "Checkout Emma";
 
-        assertEquals("Emma has been successfully checked out.", console.readMessage(message));
+        assertEquals("Emma has been successfully checked out.\nThank you! Enjoy the book.",
+                console.readMessage(message));
 
     }
 
     @Test
-    public void testCheckedOutBookDoesNotShowUpInListBooks() {
+    public void testCheckoutWhereBookTitleIsNotInLibrary() {
+        Console console = new Console();
+        String message = "Checkout Not A Real Book";
+
+        assertEquals("That book is not available.", console.readMessage(message));
+    }
+
+    @Test
+    public void testThatCheckedOutBookDoesNotShowUpInListBooks() {
         Console console = new Console();
         console.readMessage("Checkout Emma");
         String columns = console.readMessage("List Books");
         assertEquals("The Color Purple           Walker, Alice      1982\n" +
-                "" +
+                "" + // omitted because Emma has been checked out
                 "Schroder                   Gaige, Amity       2013\n" +
                 "True Grit                  Portis, Charles    1968\n" +
                 "Beloved                    Morrison, Toni     1987\n" +
@@ -70,6 +79,33 @@ public class ConsoleTest {
                 "Lord of the Flies          Golding, William   1954\n" +
                 "The White Tiger            Adiga, Avarind     2008", columns);
 
+    }
+
+    @Test
+    public void testReadMessageWithReturn() {
+        Console console = new Console();
+        console.readMessage("Checkout Emma");
+
+        assertEquals("Emma has been successfully returned.\nThank you for returning the book.",
+                console.readMessage("Return Emma"));
+    }
+
+    @Test
+    public void testThatAReturnedBookDoesShowUpInListBooks() {
+        Console console = new Console();
+        console.readMessage("Checkout Emma");
+        console.readMessage("Checkout Kiss of the Spider Woman");
+        console.readMessage("Return Emma");
+        String columns = console.readMessage("List Books");
+
+        assertEquals("The Color Purple           Walker, Alice      1982\n" +
+                "Emma                       Austen, Jane       1815\n" +
+                "Schroder                   Gaige, Amity       2013\n" +
+                "True Grit                  Portis, Charles    1968\n" +
+                "Beloved                    Morrison, Toni     1987\n" +
+                "" + // ommitted because checked out"
+                "Lord of the Flies          Golding, William   1954\n" +
+                "The White Tiger            Adiga, Avarind     2008", columns);
     }
 }
 

@@ -29,14 +29,22 @@ public class Library {
         bookList.add(new Book("The White Tiger", "Adiga, Avarind", "2008"));
     }
 
+    public boolean containsTitle(String title) {
+        for (Book book : bookList) {
+            if (book.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Book getBookByTitle(String title) {
         for (Book book : bookList) {
             if (book.getTitle().equals(title)) {
                 return book;
             }
         }
-        return null;
-//        throw new RuntimeException("Book not found.");
+        throw new IllegalArgumentException("Book not found.");
     }
 
     public String getBookListInColumns() {

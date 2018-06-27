@@ -62,6 +62,10 @@ public class Book {
         isCheckedIn = false;
     }
 
+    void returnBook() {
+        isCheckedIn = true;
+    }
+
     public boolean equals(Book other) {
         return other.toString().equals(toString());
     }
