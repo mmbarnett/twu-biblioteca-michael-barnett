@@ -1,5 +1,10 @@
 package com.twu.biblioteca;
 
+/*
+This is a BOOK.  It keeps track of its title, author, year published, and whether or not
+it is currently checked in.  It also returns itself as a string in several aesthetic ways.
+ */
+
 public class Book {
     private String title;
     private String author;
@@ -19,6 +24,10 @@ public class Book {
 
     String getAuthor() {
         return author;
+    }
+
+    boolean isCheckedIn() {
+        return isCheckedIn;
     }
 
     public String getYear() {
@@ -51,6 +60,10 @@ public class Book {
 
     void checkOut() {
         isCheckedIn = false;
+    }
+
+    public boolean equals(Book other) {
+        return other.toString().equals(toString());
     }
 
 

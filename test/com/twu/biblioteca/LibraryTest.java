@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class LibraryTest {
 
@@ -19,4 +19,14 @@ public class LibraryTest {
                         "The White Tiger            Adiga, Avarind     2008",
                 library.getBookListInColumns());
     }
+
+    @Test
+    public void testGetBookByTitle() {
+        Library library = new Library();
+        Book book = library.getBookByTitle("Emma");
+        assertTrue(book.equals(
+                new Book("Emma", "Austen, Jane", "1815")));
+
+    }
+
 }

@@ -47,5 +47,29 @@ public class ConsoleTest {
         assertEquals("Goodbye!", console.quit());
     }
 
+    @Test
+    public void testReadMessageWithCheckout() {
+        Console console = new Console();
+        String message = "Checkout Emma";
+
+        assertEquals("Emma has been successfully checked out.", console.readMessage(message));
+
+    }
+
+    @Test
+    public void testCheckedOutBookDoesNotShowUpInListBooks() {
+        Console console = new Console();
+        console.readMessage("Checkout Emma");
+        String columns = console.readMessage("List Books");
+        assertEquals("The Color Purple           Walker, Alice      1982\n" +
+                "" +
+                "Schroder                   Gaige, Amity       2013\n" +
+                "True Grit                  Portis, Charles    1968\n" +
+                "Beloved                    Morrison, Toni     1987\n" +
+                "Kiss of the Spider Woman   Puig, Manuel       1976\n" +
+                "Lord of the Flies          Golding, William   1954\n" +
+                "The White Tiger            Adiga, Avarind     2008", columns);
+
+    }
 }
 
