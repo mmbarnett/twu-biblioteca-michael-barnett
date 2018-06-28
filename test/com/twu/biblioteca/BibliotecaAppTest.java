@@ -61,4 +61,39 @@ public class BibliotecaAppTest {
                 "The White Tiger            Adiga, Avarind     2008\n", outContent.toString());
     }
 
+    @Test
+    public void testListenForSeveralMessages() {
+        String message = "List Books\nCheckout Emma\nCheckout The White Tiger\nReturn Emma\nList Books\nQuit\n";
+        byte[] bytes = message.getBytes();
+
+        ByteArrayInputStream inContent = new ByteArrayInputStream(bytes);
+
+        Console console = new Console();
+
+        BibliotecaApp.listen(inContent, console);
+
+        assertEquals("The Color Purple           Walker, Alice      1982\n" +
+                "Emma                       Austen, Jane       1815\n" +
+                "Schroder                   Gaige, Amity       2013\n" +
+                "True Grit                  Portis, Charles    1968\n" +
+                "Beloved                    Morrison, Toni     1987\n" +
+                "Kiss of the Spider Woman   Puig, Manuel       1976\n" +
+                "Lord of the Flies          Golding, William   1954\n" +
+                "The White Tiger            Adiga, Avarind     2008\n" +
+                "Emma has been successfully checked out.\n" +
+                "Thank you! Enjoy the book.\n" +
+                "The White Tiger has been successfully checked out.\n" +
+                "Thank you! Enjoy the book.\n" +
+                "Emma has been successfully returned.\n" +
+                "Thank you for returning the book.\n" +
+                "The Color Purple           Walker, Alice      1982\n" +
+                "Emma                       Austen, Jane       1815\n" +
+                "Schroder                   Gaige, Amity       2013\n" +
+                "True Grit                  Portis, Charles    1968\n" +
+                "Beloved                    Morrison, Toni     1987\n" +
+                "Kiss of the Spider Woman   Puig, Manuel       1976\n" +
+                "Lord of the Flies          Golding, William   1954\n" +
+                "Goodbye!\n", outContent.toString());
+    }
+
 }

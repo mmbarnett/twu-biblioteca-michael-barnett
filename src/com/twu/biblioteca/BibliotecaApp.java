@@ -16,9 +16,11 @@ public class BibliotecaApp {
     // this accepts a general InputStream for testing purposes
     public static void listen(InputStream in, Console console) {
         Scanner sc = new Scanner(in);
-        String command = sc.nextLine();
-        String response = console.readMessage(command);
-        System.out.println(response);
+        while (sc.hasNext()) {
+            String command = sc.nextLine();
+            String response = console.readMessage(command);
+            System.out.println(response);
+        }
     }
 
     public static void welcome(Console console) {
