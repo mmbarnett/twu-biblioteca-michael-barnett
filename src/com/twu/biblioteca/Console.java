@@ -20,6 +20,8 @@ class Console {
     String getMainMenu() {
         return "MAIN MENU:\n" +
                 "List Books\n" +
+                "Checkout <Title>\n" +
+                "Return <Title>\n" +
                 "Quit";
     }
 
@@ -50,14 +52,19 @@ class Console {
 
     private String performReturnSequence(String in) {
         String bookTitle = getAllWordsExceptFirstWord(in); //AH CHANGE THIS
-        if (library.containsTitle(bookTitle)) {
+        if (library.containsTitle(bookTitle) && isBookWithThisTitleCheckedOut(bookTitle)) {
             Book toReturn = library.getBookByTitle(bookTitle);
             toReturn.returnBook();
             return toReturn.getTitle() + " has been successfully returned.\nThank you for returning the book.";
         }
         else {
-            return "That book is not available.";
+            return "This is not a valid book to return.";
         }
+    }
+
+    private boolean isBookWithThisTitleCheckedOut(String title) {
+        Book book = library.getBookByTitle(title);
+        return !book.isCheckedIn();
     }
 
     private String performCheckOutSequence(String in) {

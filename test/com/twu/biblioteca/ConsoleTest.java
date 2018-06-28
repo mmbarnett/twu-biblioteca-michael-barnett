@@ -15,7 +15,12 @@ public class ConsoleTest {
     @Test
     public void testMainMenu() {
         Console console = new Console();
-        assertEquals(console.getMainMenu(), "MAIN MENU:\nList Books\nQuit");
+        assertEquals(console.getMainMenu(), "" +
+                "MAIN MENU:\n" +
+                "List Books\n" +
+                "Checkout <Title>\n" +
+                "Return <Title>\n" +
+                "Quit");
     }
 
     @Test
@@ -103,9 +108,23 @@ public class ConsoleTest {
                 "Schroder                   Gaige, Amity       2013\n" +
                 "True Grit                  Portis, Charles    1968\n" +
                 "Beloved                    Morrison, Toni     1987\n" +
-                "" + // ommitted because checked out"
+                "" + // omitted because checked out"
                 "Lord of the Flies          Golding, William   1954\n" +
                 "The White Tiger            Adiga, Avarind     2008", columns);
+    }
+
+    @Test
+    public void testInvalidReturn() {
+        Console console = new Console();
+
+        // want to check for an invalid return in two cases:
+        // 1) The book isn't in the library
+        assertEquals("This is not a valid book to return.",
+                console.readMessage("Return A Book Not in the Library"));
+
+        // 2) The book isn't checked out
+        assertEquals("This is not a valid book to return.", console.readMessage("Return Emma"));
+
     }
 }
 
