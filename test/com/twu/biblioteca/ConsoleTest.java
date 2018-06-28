@@ -16,7 +16,7 @@ public class ConsoleTest {
     public void testMainMenu() {
         Console console = new Console();
         assertEquals(console.getMainMenu(), "" +
-                "MAIN MENU:\n" +
+                "\nMAIN MENU:\n" +
                 "List Books\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +

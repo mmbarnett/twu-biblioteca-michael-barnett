@@ -18,7 +18,7 @@ class Console {
     }
 
     String getMainMenu() {
-        return "MAIN MENU:\n" +
+        return "\nMAIN MENU:\n" +
                 "List Books\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
