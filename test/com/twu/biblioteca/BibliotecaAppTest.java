@@ -96,4 +96,18 @@ public class BibliotecaAppTest {
                 "Goodbye!\n", outContent.toString());
     }
 
+    @Test
+    public void testQuitExitsProgram() {
+        String message = "Quit\nList Books\n";
+        byte[] bytes = message.getBytes();
+
+        ByteArrayInputStream inContent = new ByteArrayInputStream(bytes);
+
+        Console console = new Console();
+
+        BibliotecaApp.listen(inContent, console);
+
+        assertEquals("Goodbye!\n", outContent.toString());
+    }
+
 }

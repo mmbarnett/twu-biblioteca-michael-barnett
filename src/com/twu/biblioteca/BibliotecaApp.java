@@ -20,6 +20,10 @@ public class BibliotecaApp {
             String command = sc.nextLine();
             String response = console.readMessage(command);
             System.out.println(response);
+
+            if (command.equals("Quit")) {
+                break;
+            }
         }
     }
 
