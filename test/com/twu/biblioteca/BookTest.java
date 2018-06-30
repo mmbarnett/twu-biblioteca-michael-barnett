@@ -23,8 +23,6 @@ public class BookTest {
     @Test
     public void testEquals() {
         Book book = new Book("Emma", "Austen, Jane", "1815");
-//        assertEquals(book, new Book("Emma", "Austen, Jane", "1815"));
-//        assertNotEquals(book, new Book("Not Emma", "Not Austen, Jane", "2015"));
         assertTrue(book.equals(new Book("Emma", "Austen, Jane", "1815")));
     }
 }

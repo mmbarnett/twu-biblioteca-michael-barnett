@@ -52,7 +52,7 @@ class Console {
 
     private String performReturnSequence(String in) {
         String bookTitle = getAllWordsExceptFirstWord(in); //AH CHANGE THIS
-        if (library.containsTitle(bookTitle) && bookWithThisTitleIsCheckedOut(bookTitle)) {
+        if (isAValidReturn(bookTitle)) {
             Book toReturn = library.getBookByTitle(bookTitle);
             toReturn.returnBook();
             return toReturn.getTitle() + " has been successfully returned.\nThank you for returning the book.";
@@ -77,6 +77,10 @@ class Console {
         else {
             return "That book is not available.";
         }
+    }
+
+    private boolean isAValidReturn(String title) {
+        return library.containsTitle(title) && bookWithThisTitleIsCheckedOut(title);
     }
 
     private boolean isAValidCheckout(String title) {
