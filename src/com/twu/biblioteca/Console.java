@@ -52,7 +52,7 @@ class Console {
 
     private String performReturnSequence(String in) {
         String bookTitle = getAllWordsExceptFirstWord(in); //AH CHANGE THIS
-        if (library.containsTitle(bookTitle) && isBookWithThisTitleCheckedOut(bookTitle)) {
+        if (library.containsTitle(bookTitle) && bookWithThisTitleIsCheckedOut(bookTitle)) {
             Book toReturn = library.getBookByTitle(bookTitle);
             toReturn.returnBook();
             return toReturn.getTitle() + " has been successfully returned.\nThank you for returning the book.";
@@ -62,14 +62,14 @@ class Console {
         }
     }
 
-    private boolean isBookWithThisTitleCheckedOut(String title) {
+    private boolean bookWithThisTitleIsCheckedOut(String title) {
         Book book = library.getBookByTitle(title);
         return !book.isCheckedIn();
     }
 
     private String performCheckOutSequence(String in) {
         String bookTitle = getAllWordsExceptFirstWord(in);
-        if (library.containsTitle(bookTitle)) {
+        if (isAValidCheckout(bookTitle)) {
             Book toCheckout = library.getBookByTitle(bookTitle);
             toCheckout.checkOut();
             return toCheckout.getTitle() + " has been successfully checked out.\nThank you! Enjoy the book.";
@@ -77,6 +77,10 @@ class Console {
         else {
             return "That book is not available.";
         }
+    }
+
+    private boolean isAValidCheckout(String title) {
+        return library.containsTitle(title) && !bookWithThisTitleIsCheckedOut(title);
     }
 
     private boolean isACheckoutMessage(String message) {

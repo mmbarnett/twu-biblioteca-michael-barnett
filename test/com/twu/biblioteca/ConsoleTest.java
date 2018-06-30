@@ -71,6 +71,13 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testCheckoutWhereBookHasAlreadyBeenCheckedOut() {
+        Console console = new Console();
+        console.readMessage("Checkout Emma");
+        assertEquals("That book is not available.", console.readMessage("Checkout Emma"));
+    }
+
+    @Test
     public void testThatCheckedOutBookDoesNotShowUpInListBooks() {
         Console console = new Console();
         console.readMessage("Checkout Emma");
