@@ -5,40 +5,40 @@ This is a BOOK.  It keeps track of its title, author, year published, and whethe
 it is currently checked in.  It also returns itself as a string in several aesthetic ways.
  */
 
-public class Book {
-    private String title;
-    private String author;
-    private String year;
-    private boolean isCheckedIn;
+public class Book extends Resource {
 
-    Book(String titleArg, String authorArg, String yearArg) {
+    public Book(String titleArg, String authorArg, String yearArg) {
         title = titleArg;
-        author = authorArg;
+        creator = authorArg;
         year = yearArg;
         isCheckedIn = true;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
-    }
-
-    String getAuthor() {
-        return author;
-    }
-
-    boolean isCheckedIn() {
-        return isCheckedIn;
     }
 
     public String getYear() {
         return year;
     }
 
-    public String toString() {
-        return title + "\t" + author + "\t" + year;
+    public String getCreator() {
+        return getAuthor();
     }
 
-    String toColumn(int titleLength, int authorLength) {
+    public boolean isCheckedIn() {
+        return isCheckedIn;
+    }
+
+    public String getAuthor() {
+        return creator;
+    }
+
+    public String toString() {
+        return title + "\t" + creator + "\t" + year;
+    }
+
+    public String toColumn(int titleLength, int authorLength) {
         if (!isCheckedIn) {
             return "";
         }
@@ -48,7 +48,7 @@ public class Book {
             row.append(" ");
         }
 
-        row.append(author);
+        row.append(creator);
         while (row.length() < titleLength + authorLength + 6) {
             row.append(" ");
         }
@@ -58,17 +58,8 @@ public class Book {
         return row.toString();
     }
 
-    void checkOut() {
-        isCheckedIn = false;
-    }
-
-    void returnBook() {
-        isCheckedIn = true;
-    }
-
     public boolean equals(Book other) {
         return other.toString().equals(toString());
     }
-
 
 }

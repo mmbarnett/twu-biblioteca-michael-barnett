@@ -29,4 +29,13 @@ public class LibraryTest {
 
     }
 
+    @Test
+    public void testGetMovieListInColumns() {
+        Library library = new Library();
+        assertEquals(
+                "The Mooovie   2014   Cow, Arthur       10\n" +
+                "Star Warts    1998   Gothel, Mother    Unrated\n" +
+                "O Rosalind    1622   Montague, Romeo   3",
+                library.getMovieListInColumns());
+    }
 }

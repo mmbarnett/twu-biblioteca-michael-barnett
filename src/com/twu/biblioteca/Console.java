@@ -54,7 +54,7 @@ class Console {
         String bookTitle = getAllWordsExceptFirstWord(in); //AH CHANGE THIS
         if (isAValidReturn(bookTitle)) {
             Book toReturn = library.getBookByTitle(bookTitle);
-            toReturn.returnBook();
+            toReturn.checkIn();
             return toReturn.getTitle() + " has been successfully returned.\nThank you for returning the book.";
         }
         else {
