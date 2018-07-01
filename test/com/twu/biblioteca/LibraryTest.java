@@ -23,7 +23,7 @@ public class LibraryTest {
     @Test
     public void testGetBookByTitle() {
         Library library = new Library();
-        Book book = library.getBookByTitle("Emma");
+        Book book = library.getResourceByTitle("Emma").toBook();
         assertTrue(book.equals(
                 new Book("Emma", "Austen, Jane", "1815")));
 

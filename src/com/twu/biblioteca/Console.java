@@ -53,9 +53,9 @@ class Console {
     }
 
     private String performReturnSequence(String in) {
-        String bookTitle = getAllWordsExceptFirstWord(in); //AH CHANGE THIS
-        if (isAValidReturn(bookTitle)) {
-            Book toReturn = library.getBookByTitle(bookTitle);
+        String title = getAllWordsExceptFirstWord(in);
+        if (isAValidReturn(title)) {
+            Resource toReturn = library.getResourceByTitle(title);
             toReturn.checkIn();
             return toReturn.getTitle() + " has been successfully returned.\nThank you for returning the book.";
         }
@@ -64,15 +64,15 @@ class Console {
         }
     }
 
-    private boolean bookWithThisTitleIsCheckedOut(String title) {
-        Book book = library.getBookByTitle(title);
-        return !book.isCheckedIn();
+    private boolean resourceWithThisTitleIsCheckedOut(String title) {
+        Resource r = library.getResourceByTitle(title);
+        return !r.isCheckedIn();
     }
 
     private String performCheckOutSequence(String in) {
-        String bookTitle = getAllWordsExceptFirstWord(in);
-        if (isAValidCheckout(bookTitle)) {
-            Book toCheckout = library.getBookByTitle(bookTitle);
+        String title = getAllWordsExceptFirstWord(in);
+        if (isAValidCheckout(title)) {
+            Resource toCheckout = library.getResourceByTitle(title);
             toCheckout.checkOut();
             return toCheckout.getTitle() + " has been successfully checked out.\nThank you! Enjoy the book.";
         }
@@ -82,11 +82,11 @@ class Console {
     }
 
     private boolean isAValidReturn(String title) {
-        return library.containsTitle(title) && bookWithThisTitleIsCheckedOut(title);
+        return library.containsTitle(title) && resourceWithThisTitleIsCheckedOut(title);
     }
 
     private boolean isAValidCheckout(String title) {
-        return library.containsTitle(title) && !bookWithThisTitleIsCheckedOut(title);
+        return library.containsTitle(title) && !resourceWithThisTitleIsCheckedOut(title);
     }
 
     private boolean isACheckoutMessage(String message) {
@@ -94,9 +94,9 @@ class Console {
         return (splitIntoWords[0].equals("Checkout"));
     }
 
-    private Book parseCheckoutMessageAndReturnBook(String message) {
+    private Resource parseCheckoutMessageAndReturnBook(String message) {
         String bookTitle = getAllWordsExceptFirstWord(message);
-        return library.getBookByTitle(bookTitle);
+        return library.getResourceByTitle(bookTitle);
     }
 
     private String getAllWordsExceptFirstWord(String message) {

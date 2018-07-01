@@ -49,13 +49,18 @@ public class Library {
         return false;
     }
 
-    public Book getBookByTitle(String title) {
+    public Resource getResourceByTitle(String title) {
         for (Resource book : bookList) {
             if (book.getTitle().equals(title)) {
-                return book.toBook();
+                return book;
             }
         }
-        throw new IllegalArgumentException("Book not found.");
+        for (Resource movie : movieList) {
+            if (movie.getTitle().equals(title)) {
+                return movie;
+            }
+        }
+        throw new IllegalArgumentException("Resource not found.");
     }
 
     public String getResourceListInColumns(String mode) {

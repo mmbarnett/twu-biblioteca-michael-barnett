@@ -144,5 +144,15 @@ public class ConsoleTest {
                         "Star Warts    1998   Gothel, Mother    Unrated\n" +
                         "O Rosalind    1622   Montague, Romeo   3", columns);
     }
+
+    @Test
+    public void testCheckOutMovie() {
+        Console console = new Console();
+        console.readMessage("Checkout Star Warts");
+        assertEquals("The Mooovie   2014   Cow, Arthur       10\n" +
+                "" + // Star Warts has been checked out
+                "O Rosalind    1622   Montague, Romeo   3",
+                console.readMessage("List Movies"));
+    }
 }
 
