@@ -20,6 +20,7 @@ class Console {
     String getMainMenu() {
         return "\nMAIN MENU:\n" +
                 "List Books\n" +
+                "List Movies\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
                 "Quit";
@@ -28,8 +29,9 @@ class Console {
     String readMessage(String in) {
 
         if (in.equals("List Books")) {
-            return listBooks();
-
+            return listResources("book");
+        } else if(in.equals("List Movies")) {
+            return listResources("movie");
         } else if (isACheckoutMessage(in)) {
             return performCheckOutSequence(in);
 
@@ -102,8 +104,8 @@ class Console {
         return message.substring(indexOfSpace + 1); // the book title
     }
 
-    private String listBooks() {
-        return library.getBookListInColumns();
+    private String listResources(String mode) {
+        return library.getResourceListInColumns(mode);
     }
 
     String quit() {

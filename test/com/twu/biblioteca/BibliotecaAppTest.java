@@ -32,7 +32,8 @@ public class BibliotecaAppTest {
         BibliotecaApp.welcome(console);
         assertEquals("Hello!\nWelcome to Biblioteca.\nPlease type your commands below.\n\n" +
                 "MAIN MENU:\n" +
-                "List Books\n"+
+                "List Books\n" +
+                "List Movies\n"+
                 "Checkout <Title>\n"+
                 "Return <Title>\n"+
                 "Quit\n", outContent.toString());

@@ -17,7 +17,7 @@ public class LibraryTest {
                         "Kiss of the Spider Woman   Puig, Manuel       1976\n" +
                         "Lord of the Flies          Golding, William   1954\n" +
                         "The White Tiger            Adiga, Avarind     2008",
-                library.getBookListInColumns());
+                library.getResourceListInColumns("book"));
     }
 
     @Test
@@ -27,16 +27,6 @@ public class LibraryTest {
         assertTrue(book.equals(
                 new Book("Emma", "Austen, Jane", "1815")));
 
-    }
-
-    @Test
-    public void testGetMovieListInColumns() {
-        Library library = new Library();
-        assertEquals(
-                "The Mooovie   2014   Cow, Arthur       10\n" +
-                "Star Warts    1998   Gothel, Mother    Unrated\n" +
-                "O Rosalind    1622   Montague, Romeo   3",
-                library.getMovieListInColumns());
     }
 
     @Test

@@ -58,16 +58,6 @@ public class Library {
         throw new IllegalArgumentException("Book not found.");
     }
 
-    public String getBookListInColumns() {
-
-        StringBuilder builder = getStringBuilderOfListOfResources(getMaxFieldLength(true, bookList),
-                getMaxFieldLength(false, bookList), bookList);
-
-        deleteTrailingNewlineCharacter(builder);
-
-        return builder.toString();
-    }
-
     public String getResourceListInColumns(String mode) {
         // mode operates as follows:
         // if mode == "book", prints book list
@@ -86,38 +76,11 @@ public class Library {
             resourceList.addAll(movieList);
         }
 
-        StringBuilder builder = getStringBuilderOfListOfResources(getMaxFieldLength(true, resourceList),
-                getMaxFieldLength(false, resourceList), resourceList);
+        StringBuilder builder = getStringBuilderOfListOfResources(resourceList);
 
         deleteTrailingNewlineCharacter(builder);
 
         return builder.toString();
-    }
-
-    public String getMovieListInColumns() {
-        // get maximum title length
-        int maxTitleLength = 0;
-        int maxDirectorLength = 0;
-        for (Resource movie : movieList) {
-            if (movie.getTitle().length() > maxTitleLength) {
-                maxTitleLength = movie.getTitle().length();
-            }
-
-            if (movie.getCreator().length() > maxDirectorLength) {
-                maxDirectorLength = movie.getCreator().length();
-            }
-
-        }
-
-        StringBuilder columns = new StringBuilder();
-        for (Resource movie : movieList) {
-            columns.append(movie.toColumn(maxTitleLength, maxDirectorLength) + "\n");
-        }
-
-        deleteTrailingNewlineCharacter(columns);
-
-        return columns.toString();
-
     }
 
     // gets the maximum length of title or author in library
@@ -138,8 +101,11 @@ public class Library {
         return maxLength;
     }
 
-    private StringBuilder getStringBuilderOfListOfResources(int maxTitleLength, int maxAuthorLength,
-                                                            ArrayList<Resource> resourceList) {
+    private StringBuilder getStringBuilderOfListOfResources(ArrayList<Resource> resourceList) {
+
+        int maxTitleLength = getMaxFieldLength(true, resourceList);
+        int maxAuthorLength = getMaxFieldLength(false, resourceList);
+
         StringBuilder builder = new StringBuilder();
         for (Resource active : resourceList) {
             if (active.isCheckedIn()) {

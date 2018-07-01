@@ -18,6 +18,7 @@ public class ConsoleTest {
         assertEquals(console.getMainMenu(), "" +
                 "\nMAIN MENU:\n" +
                 "List Books\n" +
+                "List Movies\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
                 "Quit");
@@ -132,6 +133,16 @@ public class ConsoleTest {
         // 2) The book isn't checked out
         assertEquals("This is not a valid book to return.", console.readMessage("Return Emma"));
 
+    }
+
+    @Test
+    public void testListMovies() {
+        Console console = new Console();
+        String columns = console.readMessage("List Movies");
+
+        assertEquals("The Mooovie   2014   Cow, Arthur       10\n" +
+                        "Star Warts    1998   Gothel, Mother    Unrated\n" +
+                        "O Rosalind    1622   Montague, Romeo   3", columns);
     }
 }
 
