@@ -5,11 +5,8 @@ public class Movie extends Resource {
     private String rating;
 
     public Movie(String titleArg, String yearArg, String directorArg, String ratingArg) {
-        title = titleArg;
-        year = yearArg;
-        creator = directorArg;
+        super(titleArg, directorArg, yearArg); // CAUTION: argument order
         rating = ratingArg;
-        isCheckedIn = true;
     }
 
     public String getDirector() {

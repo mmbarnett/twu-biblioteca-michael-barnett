@@ -7,6 +7,13 @@ public abstract class Resource {
     protected String creator;
     protected boolean isCheckedIn;
 
+    public Resource(String titleArg, String creatorArg, String yearArg) {
+        title = titleArg;
+        year = yearArg;
+        creator = creatorArg;
+        isCheckedIn = true;
+    }
+
     public String getTitle() {
         return title;
     }

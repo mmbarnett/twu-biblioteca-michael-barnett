@@ -8,10 +8,7 @@ it is currently checked in.  It also returns itself as a string in several aesth
 public class Book extends Resource {
 
     public Book(String titleArg, String authorArg, String yearArg) {
-        title = titleArg;
-        creator = authorArg;
-        year = yearArg;
-        isCheckedIn = true;
+        super(titleArg, authorArg, yearArg);
     }
 
     public String getTitle() {
