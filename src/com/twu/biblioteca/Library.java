@@ -12,6 +12,7 @@ public class Library {
 
     private ArrayList<Resource> bookList;
     private ArrayList<Resource> movieList;
+    private ArrayList<User> userList;
 
     public Library() {
         bookList = new ArrayList<Resource>();

@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.*;
+
 /*
 This is the CONSOLE class.  Here, we read in any message typed in by the user,
 perform appropriate operations, and then return a message indicating the result.
@@ -8,9 +10,18 @@ perform appropriate operations, and then return a message indicating the result.
 class Console {
 
     private Library library;
+    private ArrayList<User> userList;
+    boolean isLoggedIn;
 
     Console() {
         library = new Library();
+        isLoggedIn = false;
+        userList = new ArrayList<User>();
+
+
+        userList.add(new User("101-3345", "letmein"));
+        userList.add(new User("777-0987", "sevens"));
+        userList.add(new User("123-4567", "password"));
     }
 
     String getWelcomeMessage() {
@@ -18,12 +29,19 @@ class Console {
     }
 
     String getMainMenu() {
-        return "\nMAIN MENU:\n" +
+        if (isLoggedIn)
+            return "\nMAIN MENU:\n" +
                 "List Books\n" +
                 "List Movies\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
                 "Quit";
+        else
+            return "\nMAIN MENU:\n" +
+                    "List Books\n" +
+                    "List Movies\n" +
+                    "Login\n" +
+                    "Quit";
     }
 
     String readMessage(String in) {
@@ -41,10 +59,27 @@ class Console {
         } else if (in.equals("Quit")) {
             return quit();
         }
-
         else {
             return "Select a valid option!";
         }
+    }
+
+    public String login(String userId, String password) {
+        if (isAValidLogin(userId, password)) {
+            isLoggedIn = true;
+            return "Successfully logged in!" + getMainMenu();
+        } else {
+            return "Failed login";
+        }
+    }
+
+    private boolean isAValidLogin(String userId, String password) {
+        for (User user : userList) {
+            if (user.isThisLogin(userId, password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isAReturnMessage(String message) {

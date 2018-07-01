@@ -34,8 +34,7 @@ public class BibliotecaAppTest {
                 "MAIN MENU:\n" +
                 "List Books\n" +
                 "List Movies\n"+
-                "Checkout <Title>\n"+
-                "Return <Title>\n"+
+                "Login\n" +
                 "Quit\n", outContent.toString());
     }
 

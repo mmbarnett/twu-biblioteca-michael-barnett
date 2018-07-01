@@ -13,14 +13,13 @@ public class ConsoleTest {
     }
 
     @Test
-    public void testMainMenu() {
+    public void testMainMenuBeforeLogin() {
         Console console = new Console();
-        assertEquals(console.getMainMenu(), "" +
+        assertEquals(console.getMainMenu(),
                 "\nMAIN MENU:\n" +
                 "List Books\n" +
                 "List Movies\n" +
-                "Checkout <Title>\n" +
-                "Return <Title>\n" +
+                "Login\n" +
                 "Quit");
     }
 
@@ -153,6 +152,19 @@ public class ConsoleTest {
                 "" + // Star Warts has been checked out
                 "O Rosalind    1622   Montague, Romeo   3",
                 console.readMessage("List Movies"));
+    }
+
+    @Test
+    public void testLogin() {
+        Console console = new Console();
+        String info = console.login("101-3345", "letmein");
+        assertEquals("Successfully logged in!\n" +
+                "MAIN MENU:\n" +
+                "List Books\n" +
+                "List Movies\n" +
+                "Checkout <Title>\n" +
+                "Return <Title>\n" +
+                "Quit", info);
     }
 }
 
