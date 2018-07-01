@@ -69,8 +69,10 @@ public class BibliotecaAppTest {
         ByteArrayInputStream inContent = new ByteArrayInputStream(bytes);
 
         Console console = new Console();
+        console.login("101-3345", "letmein");
 
         BibliotecaApp.listen(inContent, console);
+
 
         assertEquals("The Color Purple           Walker, Alice      1982\n" +
                 "Emma                       Austen, Jane       1815\n" +
@@ -108,6 +110,21 @@ public class BibliotecaAppTest {
         BibliotecaApp.listen(inContent, console);
 
         assertEquals("Goodbye!\n", outContent.toString());
+    }
+
+    @Test
+    public void testLoginOverSeveralInputs() {
+        String message = "Login\n123-4567\npassword";
+        byte[] bytes = message.getBytes();
+
+        ByteArrayInputStream inContent = new ByteArrayInputStream(bytes);
+
+        Console console = new Console();
+
+        BibliotecaApp.listen(inContent, console);
+
+        assertEquals("User ID:\nPassword:\nSuccessfully logged in!"+console.getMainMenu()+"\n",
+                outContent.toString());
     }
 
 }

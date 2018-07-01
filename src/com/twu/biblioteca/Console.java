@@ -50,10 +50,10 @@ class Console {
             return listResources("book");
         } else if(in.equals("List Movies")) {
             return listResources("movie");
-        } else if (isACheckoutMessage(in)) {
+        } else if (isACheckoutMessage(in) && isLoggedIn) {
             return performCheckOutSequence(in);
 
-        } else if (isAReturnMessage(in)) {
+        } else if (isAReturnMessage(in) && isLoggedIn) {
             return performReturnSequence(in);
 
         } else if (in.equals("Quit")) {

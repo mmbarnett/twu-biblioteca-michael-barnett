@@ -18,10 +18,21 @@ public class BibliotecaApp {
         Scanner sc = new Scanner(in);
         while (sc.hasNext()) {
             String command = sc.nextLine();
+
+            if (command.equals("Login")) { // special case
+
+                System.out.println("User ID:");
+                String userId = sc.nextLine();
+                System.out.println("Password:");
+                String password = sc.nextLine();
+                System.out.println(console.login(userId, password));
+                continue;
+            }
+
             String response = console.readMessage(command);
             System.out.println(response);
 
-            if (command.equals("Quit")) {
+            if (command.equals("Quit")) { // special case
                 break;
             }
         }

@@ -24,6 +24,18 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testMainMenuAfterLogin() {
+        Console console = new Console();
+        console.login("123-4567", "password");
+        assertEquals("\nMAIN MENU:\n" +
+                "List Books\n" +
+                "List Movies\n" +
+                "Checkout <Title>\n" +
+                "Return <Title>\n" +
+                "Quit", console.getMainMenu());
+    }
+
+    @Test
     public void testReadMessageWithInvalidInput() {
         Console console = new Console();
         String message = "This is invalid";
@@ -55,6 +67,7 @@ public class ConsoleTest {
     @Test
     public void testReadMessageWithCheckout() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         String message = "Checkout Emma";
 
         assertEquals("Emma has been successfully checked out.\nThank you! Enjoy the book.",
@@ -65,6 +78,7 @@ public class ConsoleTest {
     @Test
     public void testCheckoutWhereBookTitleIsNotInLibrary() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         String message = "Checkout Not A Real Book";
 
         assertEquals("That book is not available.", console.readMessage(message));
@@ -73,6 +87,7 @@ public class ConsoleTest {
     @Test
     public void testCheckoutWhereBookHasAlreadyBeenCheckedOut() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         console.readMessage("Checkout Emma");
         assertEquals("That book is not available.", console.readMessage("Checkout Emma"));
     }
@@ -80,6 +95,7 @@ public class ConsoleTest {
     @Test
     public void testThatCheckedOutBookDoesNotShowUpInListBooks() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         console.readMessage("Checkout Emma");
         String columns = console.readMessage("List Books");
         assertEquals("The Color Purple           Walker, Alice      1982\n" +
@@ -96,6 +112,7 @@ public class ConsoleTest {
     @Test
     public void testReadMessageWithReturn() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         console.readMessage("Checkout Emma");
 
         assertEquals("Emma has been successfully returned.\nThank you for returning the book.",
@@ -105,6 +122,7 @@ public class ConsoleTest {
     @Test
     public void testThatAReturnedBookDoesShowUpInListBooks() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         console.readMessage("Checkout Emma");
         console.readMessage("Checkout Kiss of the Spider Woman");
         console.readMessage("Return Emma");
@@ -123,6 +141,7 @@ public class ConsoleTest {
     @Test
     public void testInvalidReturn() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
 
         // want to check for an invalid return in two cases:
         // 1) The book isn't in the library
@@ -147,6 +166,7 @@ public class ConsoleTest {
     @Test
     public void testCheckOutMovie() {
         Console console = new Console();
+        console.login("101-3345", "letmein");
         console.readMessage("Checkout Star Warts");
         assertEquals("The Mooovie   2014   Cow, Arthur       10\n" +
                 "" + // Star Warts has been checked out
@@ -165,6 +185,12 @@ public class ConsoleTest {
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
                 "Quit", info);
+    }
+
+    @Test
+    public void testCannotCheckoutBeforeLogin() {
+        Console console = new Console();
+        assertEquals("Select a valid option!", console.readMessage("Checkout Emma"));
     }
 }
 
