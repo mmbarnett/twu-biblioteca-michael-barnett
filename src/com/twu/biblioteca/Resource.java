@@ -20,6 +20,11 @@ public abstract class Resource {
     }
 
     public abstract String toColumn(int titleLength, int creatorLength);
+    public abstract String toString();
+
+    public boolean equals(Resource other) {
+        return toString().equals(other.toString());
+    }
 
     public boolean isCheckedIn() {
         return isCheckedIn;
@@ -48,4 +53,6 @@ public abstract class Resource {
             throw new IllegalArgumentException("toMovie called on a non-Movie object");
         }
     }
+
+
 }

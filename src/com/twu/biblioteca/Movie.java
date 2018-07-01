@@ -53,5 +53,9 @@ public class Movie extends Resource {
 
     }
 
+    public String toString() {
+        return title + "\t" + year + "\t" + creator + "\t" + rating;
+    }
+
 
 }

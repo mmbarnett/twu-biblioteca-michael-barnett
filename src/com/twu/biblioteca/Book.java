@@ -58,8 +58,4 @@ public class Book extends Resource {
         return row.toString();
     }
 
-    public boolean equals(Book other) {
-        return other.toString().equals(toString());
-    }
-
 }
