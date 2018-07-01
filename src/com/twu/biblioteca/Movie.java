@@ -9,6 +9,7 @@ public class Movie extends Resource {
         year = yearArg;
         creator = directorArg;
         rating = ratingArg;
+        isCheckedIn = true;
     }
 
     public String getDirector() {
@@ -38,7 +39,8 @@ public class Movie extends Resource {
             row.append(" ");
         }
 
-        row.append(year + "   ");
+        row.append(year);
+        row.append("   ");
 
         row.append(creator);
         while (row.length() < titleLength + directorLength + 9 + 4) { // 4 chars for the year
