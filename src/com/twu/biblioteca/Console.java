@@ -11,7 +11,8 @@ class Console {
 
     private Library library;
     private ArrayList<User> userList;
-    boolean isLoggedIn;
+    private boolean isLoggedIn;
+    private User activeUser;
 
     Console() {
         library = new Library();
@@ -19,9 +20,12 @@ class Console {
         userList = new ArrayList<User>();
 
 
-        userList.add(new User("101-3345", "letmein"));
-        userList.add(new User("777-0987", "sevens"));
-        userList.add(new User("123-4567", "password"));
+        userList.add(new User("101-3345", "letmein", "Teresa Brown",
+                "TheresaMBrown@dayrep.com","(979) 606-5684"));
+        userList.add(new User("777-0987", "sevens",
+                "Cora John", "CoraCJohn@gmail.com", "(978) 960-2396"));
+        userList.add(new User("123-4567", "password",
+                "Neil Kerns", "NeilBKerns@teleworm.us", "(661) 574-7566"));
     }
 
     String getWelcomeMessage() {
@@ -35,6 +39,7 @@ class Console {
                 "List Movies\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
+                "View User Info\n" +
                 "Quit";
         else
             return "\nMAIN MENU:\n" +
@@ -56,6 +61,9 @@ class Console {
         } else if (isAReturnMessage(in) && isLoggedIn) {
             return performReturnSequence(in);
 
+        } else if (in.equals("View User Info") && isLoggedIn) {
+            return activeUser.getUserInfo();
+
         } else if (in.equals("Quit")) {
             return quit();
         }
@@ -65,21 +73,23 @@ class Console {
     }
 
     public String login(String userId, String password) {
-        if (isAValidLogin(userId, password)) {
+        User u = isAValidLogin(userId, password);
+        if (u != null) {
             isLoggedIn = true;
+            activeUser = u;
             return "Successfully logged in!" + getMainMenu();
         } else {
             return "Failed login";
         }
     }
 
-    private boolean isAValidLogin(String userId, String password) {
+    private User isAValidLogin(String userId, String password) {
         for (User user : userList) {
             if (user.isThisLogin(userId, password)) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
     private boolean isAReturnMessage(String message) {

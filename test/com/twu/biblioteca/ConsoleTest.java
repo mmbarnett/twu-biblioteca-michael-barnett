@@ -32,6 +32,7 @@ public class ConsoleTest {
                 "List Movies\n" +
                 "Checkout <Title>\n" +
                 "Return <Title>\n" +
+                "View User Info\n" +
                 "Quit", console.getMainMenu());
     }
 
@@ -178,19 +179,25 @@ public class ConsoleTest {
     public void testLogin() {
         Console console = new Console();
         String info = console.login("101-3345", "letmein");
-        assertEquals("Successfully logged in!\n" +
-                "MAIN MENU:\n" +
-                "List Books\n" +
-                "List Movies\n" +
-                "Checkout <Title>\n" +
-                "Return <Title>\n" +
-                "Quit", info);
+        assertEquals("Successfully logged in!" +
+                console.getMainMenu(), info);
     }
 
     @Test
     public void testCannotCheckoutBeforeLogin() {
         Console console = new Console();
         assertEquals("Select a valid option!", console.readMessage("Checkout Emma"));
+    }
+
+    @Test
+    public void testViewUserInfo() {
+        Console console = new Console();
+        console.login("123-4567","password");
+        String response = console.readMessage("View User Info");
+        assertEquals("User ID: 123-4567\n" +
+                "Name: Neil Kerns\n" +
+                "Email: NeilBKerns@teleworm.us\n" +
+                "Phone: (661) 574-7566", response);
     }
 }
 
