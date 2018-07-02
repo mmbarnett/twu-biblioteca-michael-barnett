@@ -73,7 +73,7 @@ class Console {
     }
 
     public String login(String userId, String password) {
-        User u = isAValidLogin(userId, password);
+        User u = getUserWithThisLogin(userId, password);
         if (u != null) {
             isLoggedIn = true;
             activeUser = u;
@@ -83,7 +83,7 @@ class Console {
         }
     }
 
-    private User isAValidLogin(String userId, String password) {
+    private User getUserWithThisLogin(String userId, String password) {
         for (User user : userList) {
             if (user.isThisLogin(userId, password)) {
                 return user;
@@ -137,11 +137,6 @@ class Console {
     private boolean isACheckoutMessage(String message) {
         String[] splitIntoWords = message.split(" ");
         return (splitIntoWords[0].equals("Checkout"));
-    }
-
-    private Resource parseCheckoutMessageAndReturnBook(String message) {
-        String bookTitle = getAllWordsExceptFirstWord(message);
-        return library.getResourceByTitle(bookTitle);
     }
 
     private String getAllWordsExceptFirstWord(String message) {
